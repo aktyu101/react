@@ -1,0 +1,6 @@
+.todo-item {
+  border-top: 1px solid #ddd;
+}
+.todo-item:nth-of-type(1) {
+  border-top: 0;
+}
