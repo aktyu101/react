@@ -1,6 +1,22 @@
 .todo-item {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #d5d9e1;
 }
 .todo-item:nth-of-type(1) {
   border-top: 0;
+}
+.deleteBtn:hover {
+  opacity: 50%;
+}
+.delBtn {
+  border: solid 0.5px #0057ae;
+  background-color: #fff;
+  line-height: 25px;
+  gap: 10px;
+  border-radius: 5px;
+  color: #0057ae;
+  cursor: pointer;
+}
+.delBtn:hover {
+  background-color: #0057ae;
+  color: #fff;
 }

@@ -14,7 +14,7 @@ export default function Condition() {
     setInputText(event.target.value);
   };
   const handleAddtodo = () => {
-    if (inputText.trim() === "") return; //동작을안시킴
+    if (inputText.trim() === "") return;
     const newTodo = {
       id: todoList.length + 1,
       text: inputText,
@@ -32,26 +32,50 @@ export default function Condition() {
         .map((todo, index) => ({ ...todo, id: index + 1 }))
     );
   };
+  //선택삭제
+  const handleCheckDeleteTodo = () => {
+    const noneChecked = todoList
+      .filter((todo) => todo.checked === false)
+      .map((todo, index) => ({ ...todo, id: index + 1 }));
+    console.log("none", noneChecked);
+    setTodoList(noneChecked);
+    // //checked가 true로 변경
+    // initialTodoList[0].checked = true;
+    // console.log(initialTodoList[0].checked);
+    // //checked가 true면 삭제
+  };
+  //완료
+  const completedTodo = (id) => {
+    setTodoList((list) =>
+      list
+        .filter((todo) => todo.id !== id)
+        .map((todo, index) => ({ ...todo, id: index + 1 }))
+    );
+  };
+  //완료여부
   const handleCheckTodo = (event) => {
     const id = Number(event.target.name);
     const checked = event.target.checked;
     setTodoList((list) =>
       list.map((todo) => {
         return { ...todo, checked: todo.id === id ? checked : todo.checked };
+        console.log(initialTodoList);
       })
     );
     // console.log(event.target.checked);
     // console.log(event.target.name);
   };
+  //전체삭제
+  const allDeleteTodo = () => {};
 
   return (
     <div
       style={{
-        backgroundColor: "#fff",
+        backgroundColor: "#f2e9fb21",
         width: "500px",
         padding: "20px 30px",
-        borderRadius: "20px",
-        boxShadow: "0 0 15px #000",
+        borderRadius: "10px",
+        boxShadow: "9px 9px 18px rgb(214 214 214), -9px -9px 18px #ffffff",
       }}
     >
       <h1
@@ -60,7 +84,7 @@ export default function Condition() {
           lineHeight: "1em",
           margin: 0,
           padding: "10px 0 20px 0",
-          color: "#456",
+          color: "rgb(0 87 174)",
         }}
       >
         Todo App
@@ -71,24 +95,28 @@ export default function Condition() {
           value={inputText}
           onChange={handleChangeInput}
           style={{
+            textIndent: "10px",
             height: "32px",
-            border: "1px sold #ddd",
+            border: "0.5px solid #0057ae",
             borderRadius: "5px",
             boxSizing: "border-box",
+            flexGrow: 1,
           }}
         />
         <button
           style={{
             height: "32px",
+            width: 56,
             border: 0,
             background: "none",
-            background: "#eee",
+            background: "rgb(0 87 174)",
             borderRadius: "5px",
             cursor: "pointer",
+            color: "#fff",
           }}
           onClick={handleAddtodo}
         >
-          add
+          +
         </button>
       </div>
       <ul
@@ -127,21 +155,53 @@ export default function Condition() {
               <span
                 style={{
                   display: "flex",
-                  width: 20,
-                  height: 20,
-                  backgroundColor: todo.completed ? "green" : "red",
+                  width: 8,
+                  height: 8,
+                  backgroundColor: todo.completed ? "#005500" : "#c00000",
                   borderRadius: "50%",
                 }}
               ></span>
             </div>
             <div>
-              <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+              <button
+                className="deleteBtn"
+                onClick={() => handleDeleteTodo(todo.id)}
+                style={{
+                  backgroundColor: "#969696",
+                  border: "none",
+                  borderRadius: 5,
+                  color: "#fff",
+                  cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))}
       </ul>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: 10,
+          gap: 5,
+        }}
+      >
+        <button className="delBtn" onClick={() => handleCheckDeleteTodo()}>
+          선택 삭제
+        </button>
+        <button className="delBtn" onClick={() => allDeleteTodo()}>
+          전체 삭제
+        </button>
+        <button
+          className="delBtn"
+          onClick={() => completedTodo()}
+          style={{ backgroundColor: "#0057ae", color: "#fff" }}
+        >
+          완료
+        </button>
+      </div>
     </div>
   );
 }
-//삭제 버튼 넣고 체크된 항목 한번에 삭제
-//올체크드 버튼
