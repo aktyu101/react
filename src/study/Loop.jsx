@@ -39,19 +39,18 @@ export default function Condition() {
       .map((todo, index) => ({ ...todo, id: index + 1 }));
     console.log("none", noneChecked);
     setTodoList(noneChecked);
-    // //checked가 true로 변경
-    // initialTodoList[0].checked = true;
-    // console.log(initialTodoList[0].checked);
-    // //checked가 true면 삭제
+  };
+  //전체삭제
+  const allDeleteTodo = () => {
+    let allclear = todoList;
+    allclear = [];
+    setTodoList(allclear);
   };
   //완료
-  const completedTodo = (id) => {
-    setTodoList((list) =>
-      list
-        .filter((todo) => todo.id !== id)
-        .map((todo, index) => ({ ...todo, id: index + 1 }))
-    );
-  };
+  const completedTodo = () =>
+    //컬러 바뀌는거
+    //true로 변경
+    {};
   //완료여부
   const handleCheckTodo = (event) => {
     const id = Number(event.target.name);
@@ -59,14 +58,11 @@ export default function Condition() {
     setTodoList((list) =>
       list.map((todo) => {
         return { ...todo, checked: todo.id === id ? checked : todo.checked };
-        console.log(initialTodoList);
       })
     );
     // console.log(event.target.checked);
     // console.log(event.target.name);
   };
-  //전체삭제
-  const allDeleteTodo = () => {};
 
   return (
     <div
