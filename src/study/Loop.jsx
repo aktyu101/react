@@ -46,11 +46,6 @@ export default function Condition() {
     allclear = [];
     setTodoList(allclear);
   };
-  //완료
-  const completedTodo = () =>
-    //컬러 바뀌는거
-    //true로 변경
-    {};
   //완료여부
   const handleCheckTodo = (event) => {
     const id = Number(event.target.name);
@@ -62,6 +57,12 @@ export default function Condition() {
     );
     // console.log(event.target.checked);
     // console.log(event.target.name);
+  };
+  //완료
+  const completedTodo = (id) => {
+    let checkCompleted = todoList.map((todo) => ({
+      ...todo,
+    }));
   };
 
   return (
